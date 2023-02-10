@@ -30,5 +30,12 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'line' => [
+        'channel_token'=>env('LINE_CHANNEL_TOKEN'),
+        'messenger_secret'=>env('LINE_MESSENGER_SECRET'),
+        'redirect' => env('LINE_REDIRECT_URI'),
+        'client_id' => env('LINE_CLIENT_ID'),  
+        'client_secret' => env('LINE_CLIENT_SECRET'),  
+    ],
 
 ];

@@ -8,8 +8,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
