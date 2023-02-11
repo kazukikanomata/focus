@@ -35,7 +35,7 @@ return [
         'messenger_secret'=>env('LINE_MESSENGER_SECRET'),
         'redirect' => env('LINE_REDIRECT_URI'),
         'client_id' => env('LINE_CLIENT_ID'),  
-        'client_secret' => env('LINE_CLIENT_SECRET'),  
+        'client_secret' => env('LINE_CLIENT_SECRET'),
     ],
 
 ];

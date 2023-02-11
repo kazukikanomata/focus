@@ -35,10 +35,6 @@ class LineMessengerController extends Controller
                 'text' => $event['message']['text'],
             ]);
         }
-            // $userId = $request['events'][0]['source']['userId'];
-            // $user = User::where('line_id', $userId)->first();
-            // if ($user == NULL){
-            // }
     }
 
     //     LINEのユーザーには特別にこれ　→ LINEでログインしたユーザーだけが見えたら最高
