@@ -33,15 +33,33 @@
         </div>
 
         <div class="flex items-center justify-end mt-4">
+            
+            <x-primary-button class="ml-3">
+                {{ __('Log in') }}
+            </x-primary-button>
 
+        </div>
+        
+        <div class="flex items-center justify-end mt-4">
+        
             <!-- line login -->
             <a href="{{ route('line.login') }}">
                 <img src="/btn_login_base.png" width="150" height="auto"></img>
             </a>
-
-            <x-primary-button class="ml-3">
-                {{ __('Log in') }}
-            </x-primary-button>
         </div>
+
+        <!-- twitter login -->
+        <!-- <a class="btn" href="{{ route('twitter.login') }}"
+                style="background: #1E9DEA; padding: 10px; width: 100%; text-align: center; display: block; border-radius:4px; color: #ffffff;">
+                Login with Twitter
+        </a> -->
+        
+        <!-- Google login -->
+        <div class="flex items-center justify-end mt-4">
+            <a href="{{ url('login/google') }}">
+                <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
+            </a>
+        </div>
+            
     </form>
 </x-guest-layout>
