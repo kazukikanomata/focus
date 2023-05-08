@@ -7,6 +7,7 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
+use App\Http\Controllers\GoogleLoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,13 +48,17 @@ Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.upda
 
 Route::delete('/tasks/{task}', [TaskController::class, 'destory'])->name('tasks.destory');
 
+// Line Message API
 Route::post('/line/webhook' , [LineMessengerController::class, 'webhook'])->name('line.webhook');
 Route::get('/line/message', [LineMessengerController::class, 'message'])->name('line.message');
-
 Route::get('/messages', [LineMessengerController::class, 'index'])->name('message.index');
 Route::get('/messages/{lineUserId}', [LineMessengerController::class, 'show'])->name('message.show');
-
 Route::post('/message/{lineUserId}', [LineMessengerController::class, 'create'])->name('message.create');
 
+// Line Login API
 Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('line.login');
 Route::get('/callback', [LineLoginController::class,'callback'])->name('callback');
+
+// Google Login API
+Route::get('/login/google',[GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
+Route::get('/login/google/callback', [GoogleLoginController::class, 'callback'])->name('google.callback');
