@@ -43,5 +43,7 @@ return [
         'client_secret' => env('GOOGLE_SECRET'),
         'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
-
+    'slack' => [
+        'slack_url' => env('SLACK_URL'),
+    ],
 ];

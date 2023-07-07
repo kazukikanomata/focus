@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
 use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\SlackSendMessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +33,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+
 Route::get('/', [TopController::class, 'index'] )->name('tops.index');
+
+Route::get('/welcome', [SlackSendMessageController::class, 'sendMessage'])->name('send.slack');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
 
