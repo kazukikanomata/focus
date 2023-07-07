@@ -19,6 +19,7 @@
                                     <div class="dropdown dropdown-end">
                                         <button class="btn btn-error mx-2">カテゴリー</button>
                                         <a href="{{ route('message.index') }}" class="btn btn-accent mx-2">LINEに送る</a>
+                                        <a href="{{ route('send.slack') }}" class="btn btn-orange mx-2">Slackに送る</a>
                                         <ul tabindex="0" class="menu dropdown-content p-2 shadow bg-base-100 rounded-box w-52 mt-4">
                                             <li>
                                                 <a href="{{ route('categories.index')}}">All</a>
