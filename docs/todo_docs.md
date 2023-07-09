@@ -12,9 +12,12 @@
 - メッセージ用の送信コードの作成
 - 呼び出して実行。
   - 疑問:🤔 他のファイルで定義した関数呼び出せるのかな
- 
 
 # TOODs
+
+## 他のファイルで定義した関数を呼び出す方法を探る
+laravel ファサード探究
+記事：https://reffect.co.jp/laravel/laravel-facade-understanding/
 
 ## React連携
 
