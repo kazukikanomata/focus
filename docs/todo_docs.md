@@ -20,9 +20,22 @@ laravel ファサード探究
 記事：https://reffect.co.jp/laravel/laravel-facade-understanding/
 
 ## React連携
+結構難しそう。
+あーるエフェクトさんの設定でやっても良いかも。
+URL：https://reffect.co.jp/laravel/laravel9_vite_react/
+
+- ルーティング→ `web.php`
+- js/app.jsx→　`jsファイル`を`import`している
+- `js/components/⚪︎⚪︎.jsx`は部品。
+
+あとはバックエンドから送れば最高
 
 ## Google API連携
 
 ## LINE API連携
 
 ## ゴミコード不要なやつを消していく作業
+
+## viteを理解する
+
+https://blog.capilano-fw.com/?p=11056

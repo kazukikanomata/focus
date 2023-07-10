@@ -36,6 +36,10 @@ require __DIR__.'/auth.php';
 
 Route::get('/', [TopController::class, 'index'] )->name('tops.index');
 
+Route::get('/demo', function() {
+    return view('tasks/welcome');
+});
+
 Route::get('/welcome', [SlackSendMessageController::class, 'sendMessage'])->name('send.slack');
 
 Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
