@@ -12,30 +12,30 @@
 - メッセージ用の送信コードの作成
 - 呼び出して実行。
   - 疑問:🤔 他のファイルで定義した関数呼び出せるのかな
-
-# TOODs
-
-## 他のファイルで定義した関数を呼び出す方法を探る
-laravel ファサード探究
-記事：https://reffect.co.jp/laravel/laravel-facade-understanding/
-
+ 
 ## React連携
+
 結構難しそう。
-あーるエフェクトさんの設定でやっても良いかも。
-URL：https://reffect.co.jp/laravel/laravel9_vite_react/
+アールエフェクトさんの設定でやっても良いかも。
+
+<p>URL：https://reffect.co.jp/laravel/laravel9_vite_react/</p>
+
 
 - ルーティング→ `web.php`
 - js/app.jsx→　`jsファイル`を`import`している
 - `js/components/⚪︎⚪︎.jsx`は部品。
 
-あとはバックエンドから送れば最高
+教材：https://blog.capilano-fw.com/?p=11056
 
-## Google API連携
+# TOODs
+- [ ] Slack連携
+- [ ] React連携
+- [ ] Google API連携
+- [ ] LINE API連携
+- [ ] ゴミコード不要なやつを消していく作業
+- [ ] viteを理解する
+- [ ] 他のファイルで定義した関数を呼び出す方法を探る
 
-## LINE API連携
+laravel ファサード探究
+記事：https://reffect.co.jp/laravel/laravel-facade-understanding/
 
-## ゴミコード不要なやつを消していく作業
-
-## viteを理解する
-
-https://blog.capilano-fw.com/?p=11056
