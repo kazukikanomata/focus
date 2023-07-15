@@ -28,7 +28,7 @@
 教材：https://blog.capilano-fw.com/?p=11056
 
 # TOODs
-- [ ] Slack連携
+- [ ] ~Slack連携~
 - [ ] React連携
 - [ ] Google API連携
 - [ ] LINE API連携
