@@ -1,0 +1,1 @@
+# interfaceを理解する

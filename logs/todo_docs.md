@@ -35,7 +35,9 @@
 - [ ] ゴミコード不要なやつを消していく作業
 - [ ] viteを理解する
 - [ ] 他のファイルで定義した関数を呼び出す方法を探る
+- [ ] ログインしているかチェックしていなければ、ログインに遷移させる。
+- [ ] クロージャーって何？
+- [ ] `navigation.blade.php`が死んでる
 
 laravel ファサード探究
 記事：https://reffect.co.jp/laravel/laravel-facade-understanding/
-
