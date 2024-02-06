@@ -39,9 +39,9 @@ return [
     ],
     
     'google' => [
-        'client_id'=>env('GOOGLE_ID'),
-        'client_secret' => env('GOOGLE_SECRET'),
-        'redirect' => env('GOOGLE_REDIRECT_URI'),
+        'client_id' => env('GOOGLE_KEY'), 
+        'client_secret' => env('GOOGLE_SECRET'), 
+        'redirect' => env('GOOGLE_REDIRECT_URI'), 
     ],
     'slack' => [
         'slack_url' => env('SLACK_URL'),

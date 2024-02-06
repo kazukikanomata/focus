@@ -68,5 +68,8 @@ Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('line.
 Route::get('/callback', [LineLoginController::class,'callback'])->name('callback');
 
 // Google Login API
-Route::get('/login/google',[GoogleLoginController::class, 'redirectToGoogle'])->name('google.login');
-Route::get('/login/google/callback', [GoogleLoginController::class, 'callback'])->name('google.callback');
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
+    ->name('login.google');
+
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
+    ->name('login.google.callback');
