@@ -31,7 +31,7 @@ $ php artisan config:clear
 $ php artisan make:test UserTest（ファイル名）
 ```
 
-`tests/Unit`ディレクトリ内にテストを作り隊のなら、`make:test`コマンドを実行するときにオプションを追加
+`tests/Unit`ディレクトリ内にテストを作りたいのなら、`make:test`コマンドを実行するときにオプションを追加
 
 ```
 $ php artisan make:test UserTest --unit
@@ -42,6 +42,8 @@ $ php artisan make:test UserTest --unit
 https://qiita.com/minato-naka/items/cd1d0408e412fe86edc5
 https://zenn.dev/nshiro/books/laravel-test-from-beginner/viewer/feature-unit
 
+じゃあ何をかく
+- コントローラーに対するテストが多くなるよ。
 
 ### オートローダーと名前解決
 https://reffect.co.jp/php/composer-autoload/
