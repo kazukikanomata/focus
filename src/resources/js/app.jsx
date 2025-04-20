@@ -1,17 +1,13 @@
-import "./bootstrap";
+import React from "react";
+import ReactDOM from 'react-dom/client';
+import TopPage from "./components/TopPage";
 
-import ReactDOM from "react-dom/client";
-import Counter from "./components/Counter";
+const rootElement = document.getElementById('app');
 
-
-function App() {
-  return(
-    <>
-      <h1>Hello World</h1>
-      <Counter/>
-    </>
-  );
+if (rootElement) {
+    ReactDOM.createRoot(rootElement).render(
+        <React.StrictMode>
+            <TopPage />
+        </React.StrictMode>
+    );
 }
-
-const root = ReactDOM.createRoot(document.getElementById("app"));
-root.render(<App />);
