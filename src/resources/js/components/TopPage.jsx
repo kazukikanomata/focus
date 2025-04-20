@@ -16,14 +16,12 @@ const TopPage = () => {
                     className="hero-content text-center text-neutral-content"
                 >
                     <div 
-                        className="max-w-md"
-                    >
+                        className="max-w-md">
                         <h1 className="mb-5 text-5xl font-bold">Focus</h1>
                         <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                         <a 
                             href="/categories" 
-                            className="btn btn-primary"
-                        >使ってみる</a>
+                            className="btn btn-primary">使ってみる</a>
                     </div>
                 </div>
             </div>

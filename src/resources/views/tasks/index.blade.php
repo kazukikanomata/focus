@@ -4,7 +4,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>テーブル一覧</title>
-        @vite('resources/css/app.css')
+        @viteReactRefresh
+        @vite(['resources/css/app.css', 'resources/js/app.jsx'])
     </head>
     <body>
         <x-app-layout>
