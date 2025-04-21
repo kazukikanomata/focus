@@ -1,6 +1,6 @@
 node_modules/
-src/localhost.pem
-src/localhost-key.pem
+localhost.pem
+localhost-key.pem
 /public/build
 /public/hot
 /public/storage
