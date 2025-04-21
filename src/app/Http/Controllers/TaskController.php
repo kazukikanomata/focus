@@ -6,9 +6,24 @@ use App\Models\Task;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class TaskController extends Controller
 {
+    public function index()
+    {
+        $id = Auth::id();
+        $tasks = Task::where('user_id', $id)->paginate(10);
+        $categories = Category::pluck('name', 'id');
+
+        return view('tasks.index', [
+            'tasks' => json_encode($tasks),
+            'categories' => json_encode($categories),
+            'message' => session('message'),
+        ]);
+    }
     
     /**
      * Show the form for creating a new resource.

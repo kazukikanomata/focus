@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>タスク追加</title>
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+        @vite(['resources/css/app.css'])
     </head>
     <body>
         <x-app-layout>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="button my-2">
                                 <button type="submit" class="btn btn-primary">送信</button>
-                                <a href="{{ route('categories.index') }}" class="btn btn-danger">戻る</a>
+                                <a href="{{ route('tasks.index') }}" class="btn btn-danger">戻る</a>
                             </div>
                         </form>
                     </div>

@@ -20,7 +20,7 @@ const TopPage = () => {
                         <h1 className="mb-5 text-5xl font-bold">Focus</h1>
                         <p className="mb-5">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                         <a 
-                            href="/categories" 
+                            href="/tasks" 
                             className="btn btn-primary">使ってみる</a>
                     </div>
                 </div>

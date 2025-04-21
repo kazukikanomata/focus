@@ -21,15 +21,21 @@
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <!-- 認証の名前がない時は何も返さない -->
-                            <div>{{ Auth::user()->name ?? 'ログインしてください' }}</div>
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
+                        @guest
+                            <a href="/register" class="link link-info mr-2">Register</a>
+                            <a href="/login" class="link link-accent mr-2">Login</a>
+                        @else
+                        <button class="btn" popovertarget="popover-1" style="anchor-name:--anchor-1">{{ Auth::user()->name ?? 'ログインしてください' }}</button>
+                            <ul class="dropdown menu w-52 rounded-box bg-base-100 shadow-sm"
+                            popover id="popover-1" style="position-anchor:--anchor-1">
+                                <li>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="w-full text-left">ログアウト</button>
+                                </form>
+                                </li>
+                            </ul>
+                        @endguest
                     </x-slot>
 
                     <x-slot name="content">

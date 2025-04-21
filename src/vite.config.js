@@ -15,7 +15,11 @@ export default defineConfig({
     plugins: [
         // Laravelと連携するためのプラグイン
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.jsx'],
+            input: [
+                'resources/css/app.css',
+                'resources/js/pages/TopPage.jsx',
+                'resources/js/pages/TasksIndexPage.tsx'
+            ],
             refresh: true,
         }),
         react(),

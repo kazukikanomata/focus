@@ -6,11 +6,11 @@
         <title>トップページ</title>
         <!-- ホットリロードのため -->
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/app.jsx'])
+        @vite(['resources/css/app.css', 'resources/js/pages/TopPage.jsx'])
     </head>
     <body>
         <x-app-layout>
-            <div id="app"></div>
+            <div id="top-page"></div>
         </x-app-layout>
     </body>
 </html>

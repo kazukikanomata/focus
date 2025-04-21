@@ -35,6 +35,7 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/', [TopController::class, 'index'] )->name('tops.index');
+Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
 
 Route::get('/demo', function() {
     return view('tasks/welcome');
@@ -42,7 +43,7 @@ Route::get('/demo', function() {
 
 Route::get('/welcome', [SlackSendMessageController::class, 'sendMessage'])->name('send.slack');
 
-Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+
 
 Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
 
