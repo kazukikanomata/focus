@@ -16,7 +16,6 @@ type TaskIndexProps = {
 
 
 const TasksIndex: React.FC<TaskIndexProps> =({ tasks, categories, message }) => {
-    const displayMessage = message || "メッセージがありません";
     return(
         <div className="md:container md:mx-auto py-2">
             <div className="row justify-center-center">
@@ -42,14 +41,16 @@ const TasksIndex: React.FC<TaskIndexProps> =({ tasks, categories, message }) => 
                         </div>
                     </div>
                     {/* messageがnullまたはundefinedのときにデフォルトメッセージを表示 */}
-                    <div className="alert alert-success">{displayMessage}</div>
+                    {message && (
+                        <div className="alert alert-success">{message}</div>
+                    )}
                     
                     <div className="mt-4 mb-4">
                         <p className="mx-2">{tasks.length}件が見つかりました。</p>
                     </div>
 
-                    <div className="overflow-x-auto bg-info">
-                        <table className="table w-full my-2 tex-center">
+                    <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+                        <table className="table my-2 text-center">
                             <thead>
                                 <tr>
                                     <th className="id"></th>
@@ -78,7 +79,7 @@ const TasksIndex: React.FC<TaskIndexProps> =({ tasks, categories, message }) => 
                                             <form method="post" action={`/tasks/${task.id}`} onSubmit={ (e) => {
                                                 if (!confirm('本当に削除しますか？')) e.preventDefault();
                                             }} id={`delete_${task.id}`}>
-                                                <button type="submit" className="btn bg-secondary-focus">-タスク</button>
+                                                <button type="submit" className="btn btn-accent">-タスク</button>
                                             </form>
                                         </td>
                                     </tr>

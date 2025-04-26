@@ -18,7 +18,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/pages/TopPage.jsx',
-                'resources/js/pages/TasksIndexPage.tsx'
+                'resources/js/pages/TasksIndexPage.tsx',
+                'resources/js/pages/TaskShowPage.jsx'            
             ],
             refresh: true,
         }),

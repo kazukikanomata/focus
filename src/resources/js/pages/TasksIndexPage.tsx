@@ -7,10 +7,11 @@ const root = document.getElementById("tasks-index");
 if (root) {
     const tasksRawStr = root.dataset.tasks || '{}';
     const categoriesStr = root.dataset.categories || '{}';
+    const messageStr = root.dataset.message || '{}';
 
     const tasksRaw = JSON.parse(tasksRawStr);
     const categories = JSON.parse(categoriesStr);
-    const message = root.dataset.message || undefined;
+    const message = JSON.parse(messageStr);
 
     const tasks = tasksRaw.data || [];
 
