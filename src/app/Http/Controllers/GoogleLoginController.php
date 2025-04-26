@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use Exception;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;    
-use Exception;
 
 class GoogleLoginController extends Controller
 {
-    public function redirectToGoogle(){
+    public function redirectToGoogle()
+    {
         return Socialite::driver('google')->redirect();
     }
 

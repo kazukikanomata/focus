@@ -1,14 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TopController;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
-use App\Http\Controllers\GoogleLoginController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SlackSendMessageController;
+use App\Http\Controllers\TaskController;
+use App\Http\Controllers\TopController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,30 +32,26 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-Route::get('/', [TopController::class, 'index'] )->name('tops.index');
+Route::get('/', [TopController::class, 'index'])->name('tops.index');
 Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
+Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
+Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
+Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 
-Route::get('/demo', function() {
+
+Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+
+Route::get('/demo', function () {
     return view('tasks/welcome');
 });
 
 Route::get('/welcome', [SlackSendMessageController::class, 'sendMessage'])->name('send.slack');
 
 
-
-Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create');
-Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
-
-Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
-
-Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
-
-
 // Line Message API
-Route::post('/line/webhook' , [LineMessengerController::class, 'webhook'])->name('line.webhook');
+Route::post('/line/webhook', [LineMessengerController::class, 'webhook'])->name('line.webhook');
 Route::get('/line/message', [LineMessengerController::class, 'message'])->name('line.message');
 Route::get('/messages', [LineMessengerController::class, 'index'])->name('message.index');
 Route::get('/messages/{lineUserId}', [LineMessengerController::class, 'show'])->name('message.show');
@@ -64,7 +59,7 @@ Route::post('/message/{lineUserId}', [LineMessengerController::class, 'create'])
 
 // Line Login API
 Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('line.login');
-Route::get('/callback', [LineLoginController::class,'callback'])->name('callback');
+Route::get('/callback', [LineLoginController::class, 'callback'])->name('callback');
 
 // Google Login API
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])

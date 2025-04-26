@@ -9,12 +9,15 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function getLists(){
-        $categories = Category::orderBy('id', 'asc')->pluck('name','id');
+    public function getLists()
+    {
+        $categories = Category::orderBy('id', 'asc')->pluck('name', 'id');
+
         return $categories;
     }
 
-    public function tasks(){
+    public function tasks()
+    {
         return $this->hasMany(Task::class);
     }
 }

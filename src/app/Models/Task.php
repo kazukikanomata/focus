@@ -9,21 +9,25 @@ class Task extends Model
 {
     use HasFactory;
 
-    public function user(){
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     }
 
-    public function scopeCategoryAt($query, $category_id){
-        if (empty($category_id)){
+    public function scopeCategoryAt($query, $category_id)
+    {
+        if (empty($category_id)) {
             return;
         }
+
         return $query->where('category_id', $category_id);
     }
-    
+
     protected $fillable = [
         'user_id',
         'category_id',
@@ -31,8 +35,9 @@ class Task extends Model
         'due_time',
         'status',
         'time',
-        ];
+    ];
+
     protected $dates = ['due_time'];
-    
+
     protected $table = 'tasks';
 }

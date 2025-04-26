@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 
-class ExampleTest extends TestCase {
-
+class ExampleTest extends TestCase
+{
     // public function setUp(): void
     // {
     //     parent::setUp();
@@ -26,11 +26,11 @@ class ExampleTest extends TestCase {
         dump(config('session.lifetime'));
         config(['session.lifetime' => 10]);
         dump(config('session.lifetime'));
-    
+
         $response->assertStatus(200);
     }
 
-    public function test_sample2():void
+    public function test_sample2(): void
     {
         $response = $this->get('/');
 
@@ -41,4 +41,3 @@ class ExampleTest extends TestCase {
 
     }
 }
-

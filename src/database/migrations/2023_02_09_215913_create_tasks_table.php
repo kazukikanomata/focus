@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('category_id')->unsigned();
             $table->dateTime('due_time');
             $table->time('time');
-            $table->string('content' , 200);
+            $table->string('content', 200);
             $table->string('status');
         });
     }

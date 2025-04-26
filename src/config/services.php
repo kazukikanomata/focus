@@ -31,17 +31,17 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
     'line' => [
-        'channel_token'=>env('LINE_CHANNEL_TOKEN'),
-        'messenger_secret'=>env('LINE_MESSENGER_SECRET'),
+        'channel_token' => env('LINE_CHANNEL_TOKEN'),
+        'messenger_secret' => env('LINE_MESSENGER_SECRET'),
         'redirect' => env('LINE_REDIRECT_URI'),
-        'client_id' => env('LINE_CLIENT_ID'),  
+        'client_id' => env('LINE_CLIENT_ID'),
         'client_secret' => env('LINE_CLIENT_SECRET'),
     ],
-    
+
     'google' => [
-        'client_id' => env('GOOGLE_KEY'), 
-        'client_secret' => env('GOOGLE_SECRET'), 
-        'redirect' => env('GOOGLE_REDIRECT_URI'), 
+        'client_id' => env('GOOGLE_KEY'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_REDIRECT_URI'),
     ],
     'slack' => [
         'slack_url' => env('SLACK_URL'),
