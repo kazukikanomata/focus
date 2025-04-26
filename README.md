@@ -17,6 +17,56 @@
     <li> TailWindCSS DaisyUI</li>
 </ul>
 
+## 静的解析ツールとFormatter
+
+Laravel Pint
+※ vendorのあるディレクトまで移動
+
+- コードを自動整形する
+
+```
+$ ./vendor/bin/pint
+```
+
+- 修正箇所だけを教えてくれる
+
+```
+$ ./vendor/bin/pint --test
+```
+
+特定のディレクトリを指定して修正
+  
+```
+$ ./vendor/bin/pint app/Console
+```
+
+[Larastan](https://github.com/larastan/larastan)
+
+Laravelに特化した静的解析ツール。
+
+使い方
+実行方法
+※　venderのあるディレクトリに移動
+
+```
+./vendor/bin/phpstan analyse
+```
+
+メモリが疲れているとでたら
+```
+./vendor/bin/phpstan analyse --memory-limit=2G
+```
+
+[Prettier](https://prettier.io/docs/install)
+
+実行方法
+
+```
+$ npx prettier . --write
+```
+
+
+
 ## インフラ周り
 <ul>
     <li> Docker </li>
