@@ -56,7 +56,7 @@ const TasksIndex: React.FC<TaskIndexProps> =({ tasks, categories, message }) => 
                                     <th className="id"></th>
                                     <th className="content">内容</th>
                                     <th className="due_time">期限</th>
-                                    <th className="status">状態</th>
+                                    <th className="">状態</th>
                                     <th className="time">h : m</th>
                                     <th className="icon">Edit</th>
                                     <th className="icon">delete</th>
@@ -67,7 +67,7 @@ const TasksIndex: React.FC<TaskIndexProps> =({ tasks, categories, message }) => 
                                     <tr key={task.id}>
                                         <td><li></li></td>
                                         <td>
-                                            <a href ={`/tasks/${task.id}`}>{task.content}</a>
+                                            <a className="link link-primary link-hover" href ={`/tasks/${task.id}`}>{task.content}</a>
                                         </td>
                                         <td>{task.due_time.slice(0,10)}</td>
                                         <td>{task.status}</td>

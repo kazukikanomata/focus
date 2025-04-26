@@ -8,8 +8,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-
-
 class TaskController extends Controller
 {
     public function index()
@@ -67,10 +65,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request, $task)
+    public function show($taskId)
     {
-        $task = Task::find($task);
-        return view('tasks/show')->with(['task' => $task]);
+        $task = Task::find($taskId);
+        return view('tasks/show', ['task' => $task]);
     }
 
     /**
@@ -120,7 +118,8 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
+        $task = Task::findOrFail($id);
         $task->delete();
-        return back()->with('message','タスクを削除しました');
+        return redirect()->route('tasks.index')->with('message','タスクを削除しました');
     }
 }
