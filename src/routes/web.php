@@ -39,8 +39,6 @@ Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store');
 Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
 Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
-
-
 Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
 
 Route::get('/demo', function () {
@@ -48,7 +46,6 @@ Route::get('/demo', function () {
 });
 
 Route::get('/welcome', [SlackSendMessageController::class, 'sendMessage'])->name('send.slack');
-
 
 // Line Message API
 Route::post('/line/webhook', [LineMessengerController::class, 'webhook'])->name('line.webhook');

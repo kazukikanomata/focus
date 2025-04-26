@@ -14,7 +14,6 @@
                 id="tasks-index"
                 data-tasks="{{ $tasks }}"
                 data-categories="{{ $categories }}"
-                data-message="@json(session('message'))"
             ></div>
         </x-app-layout>
     </body>

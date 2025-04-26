@@ -11,10 +11,9 @@ type Task = {
 type TaskIndexProps = {
   tasks: Task[];
   categories: { [id: string]: string };
-  message?: string;
 };
 
-const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories, message }) => {
+const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
   return (
     <div className="md:container md:mx-auto py-2">
       <div className="row justify-center-center">
@@ -48,9 +47,6 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories, message }) =>
               </div>
             </div>
           </div>
-          {/* messageがnullまたはundefinedのときにデフォルトメッセージを表示 */}
-          {message && <div className="alert alert-success">{message}</div>}
-
           <div className="mt-4 mb-4">
             <p className="mx-2">{tasks.length}件が見つかりました。</p>
           </div>
@@ -99,6 +95,14 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories, message }) =>
                         <button type="submit" className="btn btn-accent">
                           -タスク
                         </button>
+                        <input type="hidden" name="_method" value="DELETE" />
+                        <input
+                          type="hidden"
+                          name="_token"
+                          value={document
+                            .querySelector('meta[name="csrf-token"]')
+                            ?.getAttribute('content')}
+                        />
                       </form>
                     </td>
                   </tr>

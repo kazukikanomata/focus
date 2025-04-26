@@ -9,12 +9,16 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        view()->share('userTasks', $this->getUserTasks());
+    }
+
     public function index()
     {
-        return view('tasks.index', [
+        return view('tasks/index', [
             'tasks' => json_encode($this->getUserTasks()),
             'categories' => json_encode($this->getCategories()),
-            'message' => session('message'),
         ]);
     }
 
@@ -107,7 +111,7 @@ class TaskController extends Controller
         $task->user_id = auth()->user()->id; // もしユーザーidがあったら
         $task->update();
 
-        return redirect('/categories')->with('message', 'タスクを更新しました');
+        return redirect()->route('tasks.index')->with('message', 'タスクを更新しました');
     }
 
     /**

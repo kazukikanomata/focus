@@ -2,25 +2,24 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const TaskCreate = ({ categories }) => {
-  
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const clickBackButton = () => {
-      navigate(-1);
-    };
+  const clickBackButton = () => {
+    navigate(-1);
+  };
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    // categoriesをオブジェクトから配列に変換
-    const categoryList = Object.entries(categories).map(([id, name]) => ({
-        id,
-        name,
-    }));
+  // categoriesをオブジェクトから配列に変換
+  const categoryList = Object.entries(categories).map(([id, name]) => ({
+    id,
+    name,
+  }));
 
   return (
     <>
       <div className="md:container md:mx-auto py-2">
-        <div className="card w-96 bg-base-100 shadow-xl" style={{ width: "400px", margin: "auto" }}>
+        <div className="card w-96 bg-base-100 shadow-xl" style={{ width: '400px', margin: 'auto' }}>
           <div className="card-body">
             <h2 className="card-title">Add Task!!</h2>
             <br />
@@ -77,11 +76,13 @@ const TaskCreate = ({ categories }) => {
                   className="select select-primary w-full max-w-xs form-control mb-2"
                 >
                   {categoryList.map((category) => (
-                    <option key={category.id} value={category.id}>{category.name}</option>
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
                   ))}
                 </select>
               </div>
-              <input type='hidden' name='_token' value={csrfToken} />
+              <input type="hidden" name="_token" value={csrfToken} />
               <div className="button my-2">
                 <button type="submit" className="btn btn-primary">
                   送信
