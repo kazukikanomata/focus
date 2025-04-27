@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import TasksIndex from '../components/TaskIndex';
+import '../../css/app.css';
 
 const root = document.getElementById('tasks-index');
 

@@ -1,3 +1,4 @@
+import themes from 'daisyui/theme/object';
 import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
@@ -15,5 +16,10 @@ export default {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [
+    require('daisyui')
+  ],
+  daisyui: {
+    themes: ["luxury"],
+  },
 };
