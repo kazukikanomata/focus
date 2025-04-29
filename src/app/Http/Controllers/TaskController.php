@@ -27,9 +27,10 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Category $category)
+    public function create(Category $category, Task $task)
     {
-        return view('tasks/create')->with([
+        return view('tasks/common')->with([
+            'task' => $task,
             'categories' => $this->getCategories(),
         ]);
     }
@@ -70,7 +71,10 @@ class TaskController extends Controller
     {
         $task = Task::find($taskId);
 
-        return view('tasks/show', ['task' => $task]);
+        return view('tasks/common')->with([
+            'task' => $task,
+            'categories' => $this->getCategories(),
+        ]);
     }
 
     /**
@@ -81,7 +85,7 @@ class TaskController extends Controller
      */
     public function edit(Request $request, Task $task)
     {
-        return view('tasks/edit')->with([
+        return view('tasks/common')->with([
             'task' => $task,
             'categories' => $this->getCategories(),
         ]);

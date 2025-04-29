@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import TaskModal from '../components/TaskModal.jsx';
 
 type Task = {
   id: number;
@@ -14,6 +15,33 @@ type TaskIndexProps = {
 };
 
 const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
+  // Modalのスイッチ。初期値はfalseに
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState<'create' | 'edit' | 'show'>('create');
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
+  const openCreateModal = () => {
+    setModalMode('create');
+    setSelectedTask(null);
+    setIsModalOpen(true);
+  };
+
+  const openShowModal = (task: Task) => {
+    setModalMode('show');
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
+  const openEditModal = (task: Task) => {
+    setModalMode('edit');
+    setSelectedTask(task);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="md:container md:mx-auto py-2">
       <div className="row justify-center-center">
@@ -22,9 +50,36 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
             <h3 className="ml-3 my-5 text-3xl font-bold">Focus</h3>
             <div className="flex justify-end flex-1 px-2">
               <div className="flex items-stretch">
-                <a href="/tasks/create" className="btn btn-primary mx-2">
+                <button type="button" onClick={openCreateModal} className="btn btn-primary mx-2">
                   +タスク
-                </a>
+                </button>
+
+                {/* モーダル */}
+                {isModalOpen && (
+                  <dialog id="my_modal_3" className="modal" open>
+                    <div className="modal-box">
+                      <form method="dialog">
+                        <button
+                          onClick={closeModal}
+                          className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+                        >
+                          ✕
+                        </button>
+                      </form>
+
+                      {/* props経由でデータを渡す */}
+                      <TaskModal
+                        isOpen={isModalOpen}
+                        onClose={closeModal}
+                        mode={modalMode}
+                        task={selectedTask}
+                        categories={categories}
+                        onEdit={openEditModal}
+                      />
+                    </div>
+                  </dialog>
+                )}
+
                 <div className="dropdown dropdown-end">
                   <button className="btn btn-error mx-2">カテゴリー</button>
                   <a href="/messages" className="btn btn-accent mx-2">
@@ -47,6 +102,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
               </div>
             </div>
           </div>
+
           <div className="mt-4 mb-4">
             <p className="mx-2">{tasks.length}件が見つかりました。</p>
           </div>
@@ -64,6 +120,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                   <th className="icon">delete</th>
                 </tr>
               </thead>
+
               <tbody>
                 {tasks.map((task, index) => (
                   <tr key={task.id}>
@@ -71,17 +128,21 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                       <li></li>
                     </td>
                     <td>
-                      <a className="link link-primary link-hover" href={`/tasks/${task.id}`}>
+                      <button
+                        className="link link-primary link-hover"
+                        onClick={() => openShowModal(task)}
+                      >
                         {task.content}
-                      </a>
+                      </button>
                     </td>
+
                     <td>{task.due_time.slice(0, 10)}</td>
                     <td>{task.status}</td>
                     <td>{task.time.slice(0, 5)}</td>
                     <td>
-                      <a href={`/tasks/${task.id}/edit`} className="btn btn-success">
+                      <button onClick={() => openEditModal(task)} className="btn btn-success">
                         編集️
-                      </a>
+                      </button>
                     </td>
                     <td>
                       <form
