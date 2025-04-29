@@ -10,9 +10,11 @@
 
 ## 技術
 <ul>
-    <li> Laravel 9</li>
+    <li> Laravel 10</li>
     <li> MySQL8 </li>
-    <li> PHP 8.1.2 </li>
+    <li> React</li>
+    <li> TypeScript</li>
+    <li> PHP 8.2.28 </li>
     <li> Breeze </li>
     <li> TailWindCSS DaisyUI</li>
 </ul>
