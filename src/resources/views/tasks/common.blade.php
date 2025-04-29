@@ -6,13 +6,14 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>タスク追加</title>
         @viteReactRefresh
-        @vite(['resources/css/app.css', 'resources/js/components/TaskCreate.jsx', 'resources/js/pages/TaskCreatePage.jsx'])
+        @vite(['resources/css/app.css', 'resources/js/components/TaskCommonForm.jsx', 'resources/js/pages/TaskCommonPage.jsx'])
     </head>
     <body>
         <x-app-layout>
             <div 
-                id="tasks-create"
+                id="tasks-form"
                 data-categories="{{ $categories }}"
+                data-task='@json($task)'
                 ></div>
         </x-app-layout>
     </body>
