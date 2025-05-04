@@ -1,11 +1,6 @@
-import React from "react";
+import React from 'react';
 
 const TaskTextArea = () => {
-    return(
-        <>
-
-        </>  
-    );
-
+  return <></>;
 };
 export default TaskTextArea;

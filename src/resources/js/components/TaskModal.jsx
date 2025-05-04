@@ -39,11 +39,14 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
   }, [mode, task]);
 
   const getActionUrl = useMemo(() => {
-    switch(mode) {
-      case 'create': return '/tasks';
+    switch (mode) {
+      case 'create':
+        return '/tasks';
       case 'edit':
-      case 'show': return `/tasks/${task?.id ?? ''}`;
-      default: return '/tasks';
+      case 'show':
+        return `/tasks/${task?.id ?? ''}`;
+      default:
+        return '/tasks';
     }
   }, [mode]);
 
@@ -58,13 +61,16 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
       default:
         return 'task';
     }
-  }, [mode,task]);
+  }, [mode, task]);
 
   const getButtonName = useMemo(() => {
     switch (mode) {
-      case 'create': return '送信';
-      case 'show': return '編集';
-      case 'edit': return '更新';
+      case 'create':
+        return '送信';
+      case 'show':
+        return '編集';
+      case 'edit':
+        return '更新';
     }
   }, [mode]);
 
@@ -79,63 +85,63 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
 
           <form action={getActionUrl} method="POST">
             {mode === 'edit' && <input type="hidden" name="_method" value="PUT" />}
-            
-              <fieldset class="fieldset">
-                <legend class="fieldset-legend">what's your task?</legend>
-                <textarea 
-                  placeholder="内容"
-                  name="content"
-                  onChange={(e) => setContent(e.target.value)}
-                  value={content}
-                  disabled={mode === 'show'} //詳細ページでは編集不可
-                ></textarea>
-              </fieldset>
 
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">when is your task date?</legend>
-                <input 
-                  type="date"
-                  className="input w-full mb-2" 
-                  value={dueTime}
-                  onChange={(e) => setDueTime(e.target.value)}
-                  disabled={mode === 'show'}
-                  />
-              </fieldset>
+            <fieldset className="fieldset">
+              <legend class="fieldset-legend">what's your task?</legend>
+              <textarea
+                placeholder="内容"
+                name="content"
+                onChange={(e) => setContent(e.target.value)}
+                value={content}
+                disabled={mode === 'show'} //詳細ページでは編集不可
+              ></textarea>
+            </fieldset>
 
-              <fieldset className="fieldset">
-                <legend className="fieldset-legend">How's your task staus?</legend>
-                <select 
-                  defaultValue="Pick a browser" 
-                  className="select w-full mb-2"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                  disabled={mode === 'show'}
-                  >
-                  <option value="未">未</option>
-                  <option value="進行中">進行中</option>
-                  <option value="完了">完了</option>
-                </select>
-              </fieldset>
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">when is your task date?</legend>
+              <input
+                type="date"
+                className="input w-full mb-2"
+                value={dueTime}
+                onChange={(e) => setDueTime(e.target.value)}
+                disabled={mode === 'show'}
+              />
+            </fieldset>
+
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">How's your task staus?</legend>
+              <select
+                defaultValue="Pick a browser"
+                className="select w-full mb-2"
+                value={status}
+                onChange={(e) => setStatus(e.target.value)}
+                disabled={mode === 'show'}
+              >
+                <option value="未">未</option>
+                <option value="進行中">進行中</option>
+                <option value="完了">完了</option>
+              </select>
+            </fieldset>
 
             <fieldset className="fieldset">
               <legend className="fieldset-legend">How long does your task finish?</legend>
-              <input 
-                type="time" 
+              <input
+                type="time"
                 className="input w-full mb-2"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 disabled={mode === 'show'}
-                />
+              />
             </fieldset>
 
             <fieldset className="fieldset">
               <legend className="fieldset-legend">What's your category?</legend>
-              <select 
+              <select
                 className="select w-full mb-2"
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 disabled={mode === 'show'}
-                >
+              >
                 {categoryList.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
@@ -144,10 +150,7 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
               </select>
             </fieldset>
 
-            <input 
-              type="hidden" 
-              name="_token" 
-              value={csrfToken} />
+            <input type="hidden" name="_token" value={csrfToken} />
 
             <div className="flex flex-col gap-2  my-4">
               {/* showモードのときのみ編集ボタンだけ表示 */}
@@ -166,8 +169,6 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
                 {mode === 'show' ? '編集' : getButtonName}
               </button>
             </div>
-
-
           </form>
         </div>
       </div>
