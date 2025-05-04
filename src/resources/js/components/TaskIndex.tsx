@@ -24,9 +24,6 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
   const [modalMode, setModalMode] = useState<'create' | 'edit' | 'show'>('create');
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
 
-  // 選択中のカテゴリー名
-  const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>(null);
-
   // 状態を追加しておく
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
