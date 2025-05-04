@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -38,19 +38,16 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
     }
   }, [mode, task]);
 
-  const getActionUrl = () => {
-    switch (mode) {
-      case 'create':
-        return '/tasks';
+  const getActionUrl = useMemo(() => {
+    switch(mode) {
+      case 'create': return '/tasks';
       case 'edit':
-      case 'show':
-        return `/tasks/${task?.id ?? ''}`;
-      default:
-        return '/tasks';
+      case 'show': return `/tasks/${task?.id ?? ''}`;
+      default: return '/tasks';
     }
-  };
+  }, [mode]);
 
-  const getTitle = () => {
+  const getTitle = useMemo(() => {
     switch (mode) {
       case 'create':
         return 'Add Task';
@@ -61,111 +58,102 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
       default:
         return 'task';
     }
-  };
+  }, [mode,task]);
 
-  const getButtonName = () => {
+  const getButtonName = useMemo(() => {
     switch (mode) {
-      case 'create':
-        return '送信';
-      case 'show':
-        return '編集';
-      case 'edit':
-        return '更新';
+      case 'create': return '送信';
+      case 'show': return '編集';
+      case 'edit': return '更新';
     }
-  };
+  }, [mode]);
 
   return (
     <>
       <div className="card w-full max-w-md bg-base-100 shadow-xl">
         <div className="card-body">
           <div className="card-title">
-            <h2 className="card-title">{getTitle()}</h2>
+            <h2 className="card-title">{getTitle}</h2>
             <br />
           </div>
 
-          <form action={getActionUrl()} method="POST">
+          <form action={getActionUrl} method="POST">
             {mode === 'edit' && <input type="hidden" name="_method" value="PUT" />}
-            <div className="form-group">
-              <label htmlFor="content">タスクの内容</label>
-              <textarea
-                className="textarea textarea-primary form-control mb-2 w-full"
-                name="content"
-                placeholder="内容"
-                value={content}
-                onChange={(e) => setContent(e.target.value)}
-                disabled={mode === 'show'} //詳細ページでは編集不可
-              ></textarea>
-              <br />
-            </div>
+            
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend">what's your task?</legend>
+                <textarea 
+                  placeholder="内容"
+                  name="content"
+                  onChange={(e) => setContent(e.target.value)}
+                  value={content}
+                  disabled={mode === 'show'} //詳細ページでは編集不可
+                ></textarea>
+              </fieldset>
 
-            <div className="form-group">
-              <label htmlFor="due_time" className="my-2">
-                期限
-              </label>
-              <input
-                type="date"
-                name="due_time"
-                className="input input-bordered input-primary w-full mb-2"
-                value={dueTime}
-                onChange={(e) => setDueTime(e.target.value)}
-                disabled={mode === 'show'}
-              />
-              <br />
-            </div>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">when is your task date?</legend>
+                <input 
+                  type="date"
+                  className="input w-full mb-2" 
+                  value={dueTime}
+                  onChange={(e) => setDueTime(e.target.value)}
+                  disabled={mode === 'show'}
+                  />
+              </fieldset>
 
-            <div className="form-group">
-              <label htmlFor="status">状態</label>
-              <select
-                name="status"
-                className="select select-primary w-full form-control mb-2"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                disabled={mode === 'show'}
-              >
-                <option value="未">未</option>
-                <option value="進行中">進行中</option>
-                <option value="完了">完了</option>
-              </select>
-              <br />
-            </div>
+              <fieldset className="fieldset">
+                <legend className="fieldset-legend">How's your task staus?</legend>
+                <select 
+                  defaultValue="Pick a browser" 
+                  className="select w-full mb-2"
+                  value={status}
+                  onChange={(e) => setStatus(e.target.value)}
+                  disabled={mode === 'show'}
+                  >
+                  <option value="未">未</option>
+                  <option value="進行中">進行中</option>
+                  <option value="完了">完了</option>
+                </select>
+              </fieldset>
 
-            <div className="form-group">
-              <label htmlFor="time">h:m</label>
-              <br />
-              <input
-                type="time"
-                name="time"
-                className="input input-bordered input-primary w-full mb-2"
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">How long does your task finish?</legend>
+              <input 
+                type="time" 
+                className="input w-full mb-2"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
                 disabled={mode === 'show'}
-              />
-            </div>
+                />
+            </fieldset>
 
-            <div className="form-group">
-              <label htmlFor="category">Category</label>
-              <br />
-              <select
-                name="category_id"
-                className="select select-primary w-full form-control mb-2"
+            <fieldset className="fieldset">
+              <legend className="fieldset-legend">What's your category?</legend>
+              <select 
+                className="select w-full mb-2"
                 value={categoryId}
                 onChange={(e) => setCategoryId(e.target.value)}
                 disabled={mode === 'show'}
-              >
+                >
                 {categoryList.map((category) => (
                   <option key={category.id} value={category.id}>
                     {category.name}
                   </option>
                 ))}
               </select>
-            </div>
+            </fieldset>
 
-            <input type="hidden" name="_token" value={csrfToken} />
+            <input 
+              type="hidden" 
+              name="_token" 
+              value={csrfToken} />
+
             <div className="flex flex-col gap-2  my-4">
-              {/* showモードのときだけ編集ボタンだけ表示 */}
+              {/* showモードのときのみ編集ボタンだけ表示 */}
               <button
                 type={mode === 'show' ? 'button' : 'submit'}
-                className="btn btn-primary w-full"
+                className="btn btn-info md:btn-md w-full"
                 onClick={(e) => {
                   if (mode === 'show') {
                     e.preventDefault(); // リロード防止
@@ -175,9 +163,11 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
                   }
                 }}
               >
-                {mode === 'show' ? '編集' : getButtonName()}
+                {mode === 'show' ? '編集' : getButtonName}
               </button>
             </div>
+
+
           </form>
         </div>
       </div>
