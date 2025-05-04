@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import TaskModal from '../components/TaskModal.jsx';
+import TaskModal from './TaskModal';
+import TaskCategoryDropdown from '../components/TaskCategoryDropdown';
 
 type Task = {
   id: number;
@@ -7,6 +8,7 @@ type Task = {
   due_time: string;
   status: string;
   time: string;
+  category_id: string;
 };
 
 type TaskIndexProps = {
@@ -15,10 +17,18 @@ type TaskIndexProps = {
 };
 
 const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
+
   // Modalのスイッチ。初期値はfalseに
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [modalMode, setModalMode] = useState<'create' | 'edit' | 'show'>('create');
   const [selectedTask, setSelectedTask] = useState<Task | null>(null);
+
+  // 選択中のカテゴリー名
+  const [selectedCategoryName, setSelectedCategoryName] = useState<string | null>(null);
+
+  // 状態を追加しておく
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
   const openCreateModal = () => {
     setModalMode('create');
@@ -42,6 +52,12 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
     setIsModalOpen(false);
   };
 
+    // カテゴリーによる絞り込み
+    const filteredTasks = selectedCategoryId
+    ? tasks.filter(task => String(task.category_id) === String(selectedCategoryId))
+    : tasks;
+
+
   return (
     <div className="md:container md:mx-auto py-2">
       <div className="row justify-center-center">
@@ -50,8 +66,14 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
             <h3 className="ml-3 my-5 text-3xl font-bold">Focus</h3>
             <div className="flex justify-end flex-1 px-2">
               <div className="flex items-stretch">
-                <button type="button" onClick={openCreateModal} className="btn btn-primary mx-2">
-                  +タスク
+                <button 
+                  type="button" 
+                  onClick={openCreateModal} 
+                  className="btn btn-outline btn-warning mx-2">
+                  <svg className="h-8 w-8 text-orange-300"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                  </svg>
+                  追加
                 </button>
 
                 {/* モーダル */}
@@ -81,7 +103,6 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                 )}
 
                 <div className="dropdown dropdown-end">
-                  <button className="btn btn-error mx-2">カテゴリー</button>
                   <a href="/messages" className="btn btn-accent mx-2">
                     LINEに送る
                   </a>
@@ -96,7 +117,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                       <li key={id}>
                         <a href={`?category_id=${id}`}>{name}</a>
                       </li>
-                    ))}
+                      ))}
                   </ul>
                 </div>
               </div>
@@ -104,7 +125,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
           </div>
 
           <div className="mt-4 mb-4">
-            <p className="mx-2">{tasks.length}件が見つかりました。</p>
+            <p className="mx-2">{filteredTasks.length}件が見つかりました。</p>
           </div>
 
           <div className="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
@@ -115,14 +136,22 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                   <th className="content">内容</th>
                   <th className="due_time">期限</th>
                   <th className="">状態</th>
-                  <th className="time">h : m</th>
+                  <th className="time">目安時間</th>
+                  <th className="category">
+                    <TaskCategoryDropdown
+                      categories={categories}
+                      onSelect={setSelectedCategoryId}
+                    />
+                  </th>
+  
+
                   <th className="icon">Edit</th>
                   <th className="icon">delete</th>
                 </tr>
               </thead>
 
               <tbody>
-                {tasks.map((task, index) => (
+                {filteredTasks.map((task, index) => (
                   <tr key={task.id}>
                     <td>
                       <li></li>
@@ -139,8 +168,12 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                     <td>{task.due_time.slice(0, 10)}</td>
                     <td>{task.status}</td>
                     <td>{task.time.slice(0, 5)}</td>
+                    <td>{categories[task.category_id] ?? '未設定'}</td>
+
                     <td>
-                      <button onClick={() => openEditModal(task)} className="btn btn-success">
+                      <button 
+                      onClick={() => openEditModal(task)} 
+                      className="btn btn-outline btn-success">
                         編集️
                       </button>
                     </td>
@@ -153,7 +186,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                         }}
                         id={`delete_${task.id}`}
                       >
-                        <button type="submit" className="btn btn-accent">
+                        <button type="submit" className="btn btn-outline btn-error">
                           -タスク
                         </button>
                         <input type="hidden" name="_method" value="DELETE" />
@@ -170,6 +203,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                 ))}
               </tbody>
             </table>
+
           </div>
           <div className="d-flex justify-content-center mb-5"></div>
         </div>
