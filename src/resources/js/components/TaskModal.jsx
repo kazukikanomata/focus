@@ -1,4 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import TaskTextarea from './forms/TaskTextArea';
+import DueTImeInput from './forms/dueTimeInput';
+import StatusSelect from './forms/statusSelect';
+import SpentTimeInput from './forms/SpentTimeInput';
+import CategorySelect from './forms/CategorySelect';
 
 const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -86,69 +91,36 @@ const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
           <form action={getActionUrl} method="POST">
             {mode === 'edit' && <input type="hidden" name="_method" value="PUT" />}
 
-            <fieldset className="fieldset">
-              <legend class="fieldset-legend">what's your task?</legend>
-              <textarea
-                placeholder="内容"
-                name="content"
-                onChange={(e) => setContent(e.target.value)}
-                value={content}
-                disabled={mode === 'show'} //詳細ページでは編集不可
-              ></textarea>
-            </fieldset>
+            <TaskTextarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              disabled={mode === 'show'} //詳細ページでは編集不可
+            />
 
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">when is your task date?</legend>
-              <input
-                type="date"
-                className="input w-full mb-2"
-                value={dueTime}
-                onChange={(e) => setDueTime(e.target.value)}
-                disabled={mode === 'show'}
-              />
-            </fieldset>
+            <DueTImeInput
+              value={dueTime}
+              onChange={(e) => setDueTime(e.target.value)}
+              disabled={mode === 'show'}
+            />
 
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">How's your task staus?</legend>
-              <select
-                defaultValue="Pick a browser"
-                className="select w-full mb-2"
-                value={status}
-                onChange={(e) => setStatus(e.target.value)}
-                disabled={mode === 'show'}
-              >
-                <option value="未">未</option>
-                <option value="進行中">進行中</option>
-                <option value="完了">完了</option>
-              </select>
-            </fieldset>
+            <StatusSelect
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              disabled={mode === 'show'}
+            />
 
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">How long does your task finish?</legend>
-              <input
-                type="time"
-                className="input w-full mb-2"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                disabled={mode === 'show'}
-              />
-            </fieldset>
+            <SpentTimeInput
+              value={time}
+              onChange={(e) => setTime(e.target.value)}
+              disabled={mode === 'show'}
+            />
 
-            <fieldset className="fieldset">
-              <legend className="fieldset-legend">What's your category?</legend>
-              <select
-                className="select w-full mb-2"
-                value={categoryId}
-                onChange={(e) => setCategoryId(e.target.value)}
-                disabled={mode === 'show'}
-              >
-                {categoryList.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                ))}
-              </select>
-            </fieldset>
+            <CategorySelect
+              value={categoryId}
+              onChange={(e) => setCategoryId(e.target.value)}
+              disabled={mode === 'show'}
+              categories={categoryList}
+            />
 
             <input type="hidden" name="_token" value={csrfToken} />
 
