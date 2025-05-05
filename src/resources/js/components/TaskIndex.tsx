@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import TaskModal from './TaskModal';
+import TaskModal from './ui/TaskModal';
 import TaskTable from './table/TaskTable';
 
 type Task = {

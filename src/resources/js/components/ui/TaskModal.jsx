@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import TaskTextarea from './forms/TaskTextArea';
-import DueTImeInput from './forms/dueTimeInput';
-import StatusSelect from './forms/statusSelect';
-import SpentTimeInput from './forms/SpentTimeInput';
-import CategorySelect from './forms/CategorySelect';
+import TaskTextarea from './TaskTextarea';
+import DueTImeInput from './DueTimeInput';
+import StatusSelect from './StatusSelect';
+import SpentTimeInput from './SpentTimeInput';
+import CategorySelect from './CategorySelect';
 
 const TaskModal = ({ isOpen, onClose, mode, categories, task, onEdit }) => {
   const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');

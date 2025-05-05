@@ -6,7 +6,7 @@ const TopPage = () => {
       <div
         className="hero min-h-screen"
         style={{
-          backgroundImage: `url('https://daisyui.com/images/stock/photo-1507358522600-9f71e620c44e.jpg')`,
+          backgroundImage: `url('https://o-i-shi.com/wp-content/uploads/2024/11/sozai-253.jpg')`,
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>

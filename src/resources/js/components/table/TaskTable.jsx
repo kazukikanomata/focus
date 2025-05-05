@@ -1,4 +1,4 @@
-import TaskCategoryDropdown from '../TaskCategoryDropdown';
+import TaskCategoryDropdown from '../ui/TaskCategoryDropdown';
 
 const TaskTable = ({
   filteredTasks,
