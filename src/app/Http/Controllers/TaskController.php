@@ -4,21 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Task;
+use App\Services\TaskService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function __construct()
+    public function __construct(private TaskService $taskService)
     {
-        view()->share('userTasks', $this->getUserTasks());
+        view()->share('userTasks', $this->taskService->getUserTasks());
     }
 
     public function index()
     {
         return view('tasks/index', [
-            'tasks' => json_encode($this->getUserTasks()),
-            'categories' => json_encode($this->getCategories()),
+            'tasks' => json_encode($this->taskService->getUserTasks()),
+            'categories' => json_encode($this->taskService->getCategories()),
         ]);
     }
 
@@ -29,10 +29,7 @@ class TaskController extends Controller
      */
     public function create(Category $category, Task $task)
     {
-        return view('tasks/common')->with([
-            'task' => $task,
-            'categories' => $this->getCategories(),
-        ]);
+        return $this->renderFormView(new Task);
     }
 
     /**
@@ -71,10 +68,7 @@ class TaskController extends Controller
     {
         $task = Task::find($taskId);
 
-        return view('tasks/common')->with([
-            'task' => $task,
-            'categories' => $this->getCategories(),
-        ]);
+        return $this->renderFormView($task);
     }
 
     /**
@@ -83,12 +77,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request, Task $task)
+    public function edit(Task $task)
     {
-        return view('tasks/common')->with([
-            'task' => $task,
-            'categories' => $this->getCategories(),
-        ]);
+        return $this->renderFormView($task);
     }
 
     /**
@@ -132,24 +123,11 @@ class TaskController extends Controller
         return redirect()->route('tasks.index')->with('message', 'タスクを削除しました');
     }
 
-    /**
-     * カテゴリーテーブルからidとnameを抽出するメソッド
-     */
-    private function getCategories()
+    public function renderFormView(Task $task)
     {
-        return Category::pluck('name', 'id');
-    }
-
-    /**
-     * ログイン中のユーザーのユーザーのタスクを出す
-     */
-    private function getUserTasks($limit = null)
-    {
-        $query = Task::where('user_id', Auth::id());
-        if ($limit) {
-            $query->limit($limit);
-        }
-
-        return $query->paginate(10); // デフォルト値は10
+        return view('tasks/common')->with([
+            'task' => $task,
+            'categories' => $this->taskService->getCategories(),
+        ]);
     }
 }

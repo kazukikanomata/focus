@@ -4,7 +4,6 @@ use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SlackSendMessageController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TopController;
 use Illuminate\Support\Facades\Route;
