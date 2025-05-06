@@ -1,12 +1,26 @@
 import React from 'react';
 
 const TopPage = () => {
+  const getTimeBasedImage = () => {
+    const hour = new Date().getHours();
+
+    if (hour >= 6 && hour < 12) {
+      return 'https://i.pinimg.com/736x/ae/1d/ff/ae1dffdad0302dc8b5f06afb861ce630.jpg';
+    } else if (hour >= 12 && hour < 18) {
+      return 'https://i.pinimg.com/736x/76/00/0e/76000e4c83078a31defcd2ffc40fba38.jpg';
+    } else {
+      return 'https://o-i-shi.com/wp-content/uploads/2024/11/sozai-253.jpg';
+    }
+  };
+
+  const backgroundImageUrl = getTimeBasedImage();
+
   return (
     <>
       <div
         className="hero min-h-screen"
         style={{
-          backgroundImage: `url('https://o-i-shi.com/wp-content/uploads/2024/11/sozai-253.jpg')`,
+          backgroundImage: `url('${backgroundImageUrl}')`,
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
