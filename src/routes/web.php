@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GoogleApiCalendarController;
 use App\Http\Controllers\GoogleLoginController;
 use App\Http\Controllers\LineLoginController;
 use App\Http\Controllers\LineMessengerController;
@@ -40,20 +41,9 @@ Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.e
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
 
-// Line Message API
-Route::post('/line/webhook', [LineMessengerController::class, 'webhook'])->name('line.webhook');
-Route::get('/line/message', [LineMessengerController::class, 'message'])->name('line.message');
-Route::get('/messages', [LineMessengerController::class, 'index'])->name('message.index');
-Route::get('/messages/{lineUserId}', [LineMessengerController::class, 'show'])->name('message.show');
-Route::post('/message/{lineUserId}', [LineMessengerController::class, 'create'])->name('message.create');
-
-// Line Login API
-Route::get('/linelogin', [LineLoginController::class, 'lineLogin'])->name('line.login');
-Route::get('/callback', [LineLoginController::class, 'callback'])->name('callback');
-
 // Google Login API
-Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])
-    ->name('login.google');
+Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
+Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])->name('login.google.callback');
 
-Route::get('/auth/google/callback', [GoogleLoginController::class, 'handleGoogleCallback'])
-    ->name('login.google.callback');
+// Google Calendar API
+Route::get('/abc', [GoogleApiCalendarController::class, 'index']);
