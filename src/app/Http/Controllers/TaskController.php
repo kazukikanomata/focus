@@ -130,4 +130,15 @@ class TaskController extends Controller
             'categories' => $this->taskService->getCategories(),
         ]);
     }
+
+    public function bulkDelete(Request $request)
+    {
+        $taskIds = json_decode($request->input('task_ids'), true);
+
+        if (is_array($taskIds)) {
+            Task::whereIn('id', $taskIds)->delete();
+        }
+
+        return redirect()->route('tasks.index');
+    }
 }

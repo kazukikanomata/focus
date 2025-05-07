@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import TaskModal from './ui/TaskModal';
 import TaskTable from './table/TaskTable';
 
@@ -26,6 +26,9 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
   // 状態を追加しておく
   const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(null);
 
+  const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasks);
+  const [selectedTaskIds, setSelectedTaskIds] = useState<number[]>([]);
+
   const openCreateModal = () => {
     setModalMode('create');
     setSelectedTask(null);
@@ -48,10 +51,22 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
     setIsModalOpen(false);
   };
 
-  // カテゴリーによる絞り込み
-  const filteredTasks = selectedCategoryId
-    ? tasks.filter((task) => String(task.category_id) === String(selectedCategoryId))
-    : tasks;
+  useEffect(() => {
+    if (selectedCategoryId) {
+      const filtered = tasks.filter(
+        (task) => String(task.category_id) === String(selectedCategoryId)
+      );
+      setFilteredTasks(filtered);
+    } else {
+      setFilteredTasks(tasks);
+    }
+  }, [selectedCategoryId, tasks]);
+
+  const handleCheckboxChange = (taskId: number, checked: boolean) => {
+    setSelectedTaskIds((prev) =>
+      checked ? [...prev, taskId] : prev.filter((id) => id !== taskId)
+    );
+  };
 
   return (
     <div className="md:container md:mx-auto py-2">
@@ -108,7 +123,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
               )}
 
               {/* TODO: LINEに送る */}
-              <button className="btn bg-[#03C755] text-white border-[#00b544]">
+              {/* <button className="btn bg-[#03C755] text-white border-[#00b544]">
                 <svg
                   aria-label="Line logo"
                   width="16"
@@ -124,7 +139,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                   </g>
                 </svg>
                 Send LINE
-              </button>
+              </button> */}
 
               {/* TODO: Slackに送る機能 */}
               <button className="btn bg-[#622069] text-white border-[#591660]">
@@ -144,6 +159,34 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
                 </svg>
                 Send Slack
               </button>
+
+              <form
+                method="POST"
+                action="/tasks/bulk-delete"
+                onSubmit={(e) => {
+                  if (!confirm('選択されたタスクを本当に削除しますか?')) {
+                    e.preventDefault();
+                  }
+
+                  const input = document.getElementById('bulk-task-ids') as HTMLInputElement;
+
+                  if (input) {
+                    input.value = JSON.stringify(selectedTaskIds);
+                  }
+                }}
+              >
+                <input type="hidden" name="task_ids" id="bulk-task-ids" />
+                <input
+                  type="hidden"
+                  name="_token"
+                  value={
+                    document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || ''
+                  }
+                />
+                <button type="submit" className="btn btn-outline btn-error">
+                  選択したタスクの削除
+                </button>
+              </form>
             </div>
           </div>
 
@@ -157,6 +200,7 @@ const TasksIndex: React.FC<TaskIndexProps> = ({ tasks, categories }) => {
             setSelectedCategoryId={setSelectedCategoryId}
             openShowModal={openShowModal}
             openEditModal={openEditModal}
+            onCheckboxChange={handleCheckboxChange}
           />
         </div>
       </div>

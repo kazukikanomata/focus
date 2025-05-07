@@ -6,6 +6,7 @@ const TaskTable = ({
   setSelectedCategoryId,
   openShowModal,
   openEditModal,
+  onCheckboxChange,
 }) => {
   return (
     <>
@@ -31,7 +32,12 @@ const TaskTable = ({
             {filteredTasks.map((task, index) => (
               <tr key={task.id}>
                 <td>
-                  <li></li>
+                  <input
+                    type="checkbox"
+                    className="checkbox checkbox-error checkbox-lg"
+                    value={task.id}
+                    onChange={(e) => onCheckboxChange(task.id, e.target.checked)}
+                  />
                 </td>
                 <td>
                   <button

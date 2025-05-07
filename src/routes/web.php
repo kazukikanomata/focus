@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\GoogleApiCalendarController;
 use App\Http\Controllers\GoogleLoginController;
-use App\Http\Controllers\LineLoginController;
-use App\Http\Controllers\LineMessengerController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TopController;
@@ -40,6 +38,7 @@ Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show')
 Route::get('/tasks/{task}/edit', [TaskController::class, 'edit'])->name('tasks.edit');
 Route::delete('/tasks/{task}', [TaskController::class, 'destroy'])->name('tasks.destroy');
 Route::put('/tasks/{task}', [TaskController::class, 'update'])->name('tasks.update');
+Route::post('/tasks/bulk-delete', [TaskController::class, 'bulkDelete'])->name('tasks.bulkDelete');
 
 // Google Login API
 Route::get('/auth/google', [GoogleLoginController::class, 'redirectToGoogle'])->name('login.google');
