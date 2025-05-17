@@ -40,6 +40,11 @@
 
         </div>
      
+       <div class="flex w-full items-center justify-center gap-5 text-black">
+            <hr class="block h-px w-full border-0 bg-[#5a28cc]" />
+            <span>Or</span>
+            <hr class="block h-px w-full border-0 bg-[#5a28cc]" />
+        </div>
         
         <!-- Google login -->
         <button onclick="location.href='/auth/google'" class="btn w-full bg-white text-black border-[#e5e5e5]">
