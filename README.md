@@ -3,10 +3,8 @@
 </p>
 
 ## プロジェクト名 : Focus
+- 内省と1日のタスクの達成度をみるアプリ
 
-<p>Laravelにてタスク管理ができる。Webアプリをつくりました。</p>
-
-<p>Youtube:　https://youtu.be/6ovQ1A9Y3Pk</p> 
 
 ## 技術
 <ul>
